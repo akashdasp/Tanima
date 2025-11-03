@@ -183,6 +183,9 @@
     <!-- Show Message Button (appears after animations) -->
     <button id="show-message-btn">Show Message 💌</button>
 
+    <!-- Beautiful Memories Button -->
+    <button id="show-memories-btn" style="display: none;">Beautiful Memories 💕</button>
+
     <!-- Personal Message Overlay -->
     <div id="personal-message-overlay">
         <div id="personal-message">
@@ -204,6 +207,17 @@
             </div>
         </div>
     </div>
+
+    <!-- Beautiful Memories Modal Overlay -->
+    <div id="beautiful-memories-overlay" style="display: none;">
+        <div id="beautiful-memories-modal">
+            <button id="close-memories">×</button>
+            <h2 class="memories-title">Beautiful Memories 💕</h2>
+            <div class="memories-image-container">
+                <img src="Happy Birthday_files/Tanima.png" alt="Beautiful Memory" class="memories-image">
+            </div>
+        </div>
+    </div>
 </body>
 <script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
 <script src="js/jquery.js"></script>
@@ -211,7 +225,7 @@
 <script src="js/script.js"></script>
 <script>
     // Countdown Timer Script
-    const targetDate = new Date('2025-10-04T00:00:00').getTime();
+    const targetDate = new Date('2025-11-04T00:00:00').getTime();
 
     const birthdayContent = document.getElementById('birthday-content');
     const preloader = document.getElementById('preloader');
@@ -226,7 +240,7 @@
 
     // Create a Start button (hidden initially)
     const startButton = document.createElement('button');
-    startButton.textContent = "Start Celebration 🎉";
+    startButton.textContent = "Start";
     startButton.className = "btn btn-success celebration-start-btn";
     startButton.style.marginTop = "20px";
     startButton.style.display = "none";
@@ -289,9 +303,10 @@
         setTimeout(() => {
             // Replace loader content with a final message
             loader.innerHTML = '';
+            loader.style.cssText = 'display: flex; justify-content: center; align-items: center; height: 100vh; width: 100%; position: fixed; top: 0; left: 0;';
             const finalMsg = document.createElement('div');
-            finalMsg.style.cssText = 'color: white; font-size: 28px; padding: 40px; text-align: center;';
-            finalMsg.textContent = '😊 I Know You Been Waiting For This Day 😊';
+            finalMsg.style.cssText = 'color: white; font-size: 28px; padding: 40px; text-align: center; line-height: 1.6;';
+            finalMsg.innerHTML = '😊 I Know You Been Waiting<br>For This Day 😊';
             loader.appendChild(finalMsg);
 
             // Show this for 3 seconds, then reveal the main content
@@ -417,6 +432,10 @@
         $('#close-message').click(function() {
             $('#personal-message-overlay').fadeOut(300);
             $('#show-message-btn').fadeIn(300);
+            // Show Beautiful Memories button after message is closed
+            setTimeout(function() {
+                $('#show-memories-btn').fadeIn(300);
+            }, 500);
         });
 
         // Close message when clicking outside the message box
@@ -424,6 +443,30 @@
             if (e.target.id === 'personal-message-overlay') {
                 $('#personal-message-overlay').fadeOut(300);
                 $('#show-message-btn').fadeIn(300);
+                // Show Beautiful Memories button after message is closed
+                setTimeout(function() {
+                    $('#show-memories-btn').fadeIn(300);
+                }, 500);
+            }
+        });
+
+        // Show Beautiful Memories modal when button is clicked
+        $('#show-memories-btn').click(function() {
+            $('#beautiful-memories-overlay').fadeIn(300);
+            $('#show-memories-btn').fadeOut(300);
+        });
+
+        // Close Beautiful Memories modal when X is clicked
+        $('#close-memories').click(function() {
+            $('#beautiful-memories-overlay').fadeOut(300);
+            $('#show-memories-btn').fadeIn(300);
+        });
+
+        // Close Beautiful Memories modal when clicking outside the modal
+        $('#beautiful-memories-overlay').click(function(e) {
+            if (e.target.id === 'beautiful-memories-overlay') {
+                $('#beautiful-memories-overlay').fadeOut(300);
+                $('#show-memories-btn').fadeIn(300);
             }
         });
     });
