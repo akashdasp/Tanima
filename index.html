@@ -1,0 +1,333 @@
+<html>
+
+<head>
+    <title>Happy Birthday</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Countdown Preloader -->
+    <div id="preloader" class="loader" style="display: block;">
+        <div id="countdown" style="padding-top: 10%;">
+            <header id="countdown-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h1>Countdown to Celebration</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="counter">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-lg-3 col-md-6">
+                            <div class="count-up">
+                                <p class="counter-count" id="days-count">0</p>
+                                <h3>Days</h3>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6">
+                            <div class="count-up">
+                                <p class="counter-count" id="hours-count">0</p>
+                                <h3>Hours</h3>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6">
+                            <div class="count-up">
+                                <p class="counter-count" id="minutes-count">0</p>
+                                <h3>Minutes</h3>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6">
+                            <div class="count-up">
+                                <p class="counter-count" id="seconds-count">0</p>
+                                <h3>Seconds</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center" id="timer-message" style="color: white; font-size: 24px; margin-top: 30px; display: none;">
+                            It's time to celebrate! 🎂
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Birthday Content (hidden initially) -->
+    <div id="birthday-content" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="loader">
+                    <button id="play">Start</button>
+                </div>
+            </div>
+        </div>
+        <audio class="song" controls loop>
+            <source src="music.mp3">
+            </source>
+            Your browser isn't invited for super fun audio time.
+        </audio>
+        <canvas id="confetti"></canvas>
+        <div class="main">
+            <div class="container pt-5">
+                <div class="row">
+
+                    <div class="col-12 col-xl-6 mx-auto">
+                        <img src="img/banner.png" alt="">
+                    </div>
+
+                    <div class="col-12  text-center">
+                        <div id="name" class="area">Tanima</div>
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <div class="type-wrap">
+                            <div id="typed-strings" class="typing">
+                                <h2>Happy Birthday <i id="nae">Tanima</i></h2>
+                                <h2>Have a wonderful day</h2>
+                                <h2>Filled with joy and happiness.</h2>
+                            </div>
+                            <span id="typed" style="white-space:pre;"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-xl-3 cake">
+                        <img src="img/cake.gif" alt="">
+                    </div>
+                    
+                    <!-- Floating Balloons -->
+                    <div class="balloons-container" id="balloons-container" style="display: none;">
+                        <svg class="balloon balloon-red" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="50" rx="35" ry="45" fill="#ff6b6b" stroke="#ee5a6f" stroke-width="2"/>
+                            <ellipse cx="50" cy="40" rx="15" ry="18" fill="#ff8a8a" opacity="0.4"/>
+                            <line x1="50" y1="95" x2="50" y2="140" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="balloon balloon-blue" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="50" rx="35" ry="45" fill="#4ecdc4" stroke="#44a08d" stroke-width="2"/>
+                            <ellipse cx="50" cy="40" rx="15" ry="18" fill="#6ee5dc" opacity="0.4"/>
+                            <line x1="50" y1="95" x2="50" y2="140" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="balloon balloon-yellow" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="50" rx="35" ry="45" fill="#ffe66d" stroke="#f6c23e" stroke-width="2"/>
+                            <ellipse cx="50" cy="40" rx="15" ry="18" fill="#ffed8d" opacity="0.4"/>
+                            <line x1="50" y1="95" x2="50" y2="140" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="balloon balloon-green" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="50" rx="35" ry="45" fill="#51cf66" stroke="#40c057" stroke-width="2"/>
+                            <ellipse cx="50" cy="40" rx="15" ry="18" fill="#71dd86" opacity="0.4"/>
+                            <line x1="50" y1="95" x2="50" y2="140" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="balloon balloon-pink" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="50" rx="35" ry="45" fill="#ff8cc8" stroke="#ff6bb5" stroke-width="2"/>
+                            <ellipse cx="50" cy="40" rx="15" ry="18" fill="#ffaad8" opacity="0.4"/>
+                            <line x1="50" y1="95" x2="50" y2="140" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="balloon balloon-purple" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="50" rx="35" ry="45" fill="#a78bfa" stroke="#8b5cf6" stroke-width="2"/>
+                            <ellipse cx="50" cy="40" rx="15" ry="18" fill="#b79cfa" opacity="0.4"/>
+                            <line x1="50" y1="95" x2="50" y2="140" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="balloon balloon-orange" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="50" rx="35" ry="45" fill="#ff9f43" stroke="#ff6348" stroke-width="2"/>
+                            <ellipse cx="50" cy="40" rx="15" ry="18" fill="#ffb563" opacity="0.4"/>
+                            <line x1="50" y1="95" x2="50" y2="140" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="balloon balloon-cyan" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="50" rx="35" ry="45" fill="#0abde3" stroke="#54a0ff" stroke-width="2"/>
+                            <ellipse cx="50" cy="40" rx="15" ry="18" fill="#2acdf3" opacity="0.4"/>
+                            <line x1="50" y1="95" x2="50" y2="140" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <img src="img/Balloon-Border.png" width="100%" class="balloon-border">
+        </div>
+    </div>
+
+    <!-- Show Message Button (appears after animations) -->
+    <button id="show-message-btn">Show Message 💌</button>
+
+    <!-- Personal Message Overlay -->
+    <div id="personal-message-overlay">
+        <div id="personal-message">
+            <button id="close-message">×</button>
+            <h2>To My Forever Kid ❤️</h2>
+            <div class="message-content">
+                <p><strong>Happy 28th Birthday, my love! 🎉</strong></p>
+                
+                <p>I know you keep saying you're getting old, but for me — you'll always be that same cute, goofy, and innocent soul I fell in love with. No matter how many birthdays come and go, you'll always be my kid — and for Aunty and Uncle too, you'll forever be their little girl. 💖</p>
+                
+                <p>Age doesn't define you; your kindness, smile, and love do. You're growing, not old — just more wonderful with every passing year.</p>
+                
+                <p>So, here's to you — my favorite person, my constant reason to smile.</p>
+                
+                <p>I love you endlessly. 💫</p>
+            </div>
+            <div class="message-signature">
+                – Akash 💌
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/typed.min.js"></script>
+<script src="js/script.js"></script>
+<script>
+    // Countdown Timer Script
+    const targetDate = new Date('2025-10-04T00:00:00').getTime();
+
+    const birthdayContent = document.getElementById('birthday-content');
+    const preloader = document.getElementById('preloader');
+    const countdown = document.getElementById('countdown');
+
+    // Counter elements
+    const daysCount = document.getElementById('days-count');
+    const hoursCount = document.getElementById('hours-count');
+    const minutesCount = document.getElementById('minutes-count');
+    const secondsCount = document.getElementById('seconds-count');
+    const timerMessage = document.getElementById('timer-message');
+
+    // Create a Start button (hidden initially)
+    const startButton = document.createElement('button');
+    startButton.textContent = "Start Celebration 🎉";
+    startButton.className = "btn btn-success";
+    startButton.style.marginTop = "20px";
+    startButton.style.display = "none";
+    startButton.onclick = () => {
+        preloader.style.display = 'none';
+        birthdayContent.style.display = 'block';
+        // Initialize cake after content is shown
+        $('.cake').fadeIn('slow');
+        $('.cake_fadein').fadeIn('slow');
+        // Show balloons
+        document.getElementById('balloons-container').style.display = 'block';
+    };
+
+    const counterContainer = document.querySelector('.counter .container .row');
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'col-12 text-center';
+    buttonContainer.style.marginTop = '30px';
+    buttonContainer.appendChild(startButton);
+    counterContainer.appendChild(buttonContainer);
+
+    // Function to animate counter
+    function animateCounter(element, targetValue, duration = 500) {
+        const startValue = parseInt(element.textContent) || 0;
+        const increment = (targetValue - startValue) / (duration / 50);
+        let current = startValue;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if ((increment > 0 && current >= targetValue) || (increment < 0 && current <= targetValue)) {
+                element.textContent = targetValue;
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current);
+            }
+        }, 50);
+    }
+
+    // Initialize counters to 0
+    let currentDays = 0, currentHours = 0, currentMinutes = 0, currentSeconds = 0;
+
+    // Function to update counters
+    function updateCounters() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance > 0) {
+            // Calculate time components
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update counters with animation if values changed
+            if (days !== currentDays) {
+                animateCounter(daysCount, days);
+                currentDays = days;
+            }
+            if (hours !== currentHours) {
+                animateCounter(hoursCount, hours);
+                currentHours = hours;
+            }
+            if (minutes !== currentMinutes) {
+                animateCounter(minutesCount, minutes);
+                currentMinutes = minutes;
+            }
+            if (seconds !== currentSeconds) {
+                animateCounter(secondsCount, seconds);
+                currentSeconds = seconds;
+            }
+            
+            // Hide birthday content and start button
+            birthdayContent.style.display = 'none';
+            startButton.style.display = 'none';
+            timerMessage.style.display = 'none';
+            // Hide cake initially
+            $('.cake').hide();
+            // Hide balloons
+            if (document.getElementById('balloons-container')) {
+                document.getElementById('balloons-container').style.display = 'none';
+            }
+            return true;
+        } else {
+            // Birthday time reached
+            // Set all counters to 0
+            //clear the counter text such as days hours minutes seconds
+            document.querySelectorAll('.count-up h3').forEach(h3 => {
+  h3.textContent = "";
+});
+            daysCount.textContent = '';
+            hoursCount.textContent = '';
+            minutesCount.textContent = '';
+            secondsCount.textContent = '';
+            
+            timerMessage.style.display = 'block';
+            startButton.style.display = 'inline-block';
+            return false;
+        }
+    }
+
+    // Initialize counters immediately
+    updateCounters();
+
+    const timer = setInterval(function() {
+        const shouldContinue = updateCounters();
+        if (!shouldContinue) {
+            clearInterval(timer);
+        }
+    }, 1000);
+
+    // Personal Message Functionality
+    $(document).ready(function() {
+        // Show message when button is clicked
+        $('#show-message-btn').click(function() {
+            $('#personal-message-overlay').fadeIn(300);
+            $('#show-message-btn').fadeOut(300);
+        });
+
+        // Close message when X is clicked or overlay is clicked
+        $('#close-message').click(function() {
+            $('#personal-message-overlay').fadeOut(300);
+            $('#show-message-btn').fadeIn(300);
+        });
+
+        // Close message when clicking outside the message box
+        $('#personal-message-overlay').click(function(e) {
+            if (e.target.id === 'personal-message-overlay') {
+                $('#personal-message-overlay').fadeOut(300);
+                $('#show-message-btn').fadeIn(300);
+            }
+        });
+    });
+</script>
+
+</html>
