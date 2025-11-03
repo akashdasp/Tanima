@@ -117,7 +117,7 @@
                                 <h2>Filled with joy and happiness.</h2>
                                 <h2>May God make you wiser and happier</h2>
                                 <h2>May He bless you with health and joy</h2>
-                                <h2>Wishing you laughter, love, and success</h2>
+                                <h2>Wishing you laughter,love ,and success</h2>
                                 <h2>May all your dreams come true</h2>
                                 <h2>Keep shining brighter every day</h2>
                                 <h2>Enjoy your special day to the fullest</h2>
@@ -227,9 +227,35 @@
     // Create a Start button (hidden initially)
     const startButton = document.createElement('button');
     startButton.textContent = "Start Celebration 🎉";
-    startButton.className = "btn btn-success";
+    startButton.className = "btn btn-success celebration-start-btn";
     startButton.style.marginTop = "20px";
     startButton.style.display = "none";
+    
+    // Add specific styles for the button
+    const styleSheet = document.createElement("style");
+    styleSheet.textContent = `
+        .celebration-start-btn {
+            padding: 15px 25px;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 24px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        @media screen and (max-width: 430px) {
+            .celebration-start-btn {
+                font-size: 16px;
+                padding: 10px 16px;
+                width: 220px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-weight: 500;
+            }
+        }
+    `;
+    document.head.appendChild(styleSheet);
     startButton.onclick = () => {
         // Hide countdown and show loading screen
         countdown.style.display = 'none';
@@ -240,7 +266,7 @@
         
         const loaderImg = document.createElement('img');
         loaderImg.src = 'Happy Birthday_files/Tanima.png';
-        loaderImg.style.cssText = 'max-width: 300px; border-radius: 10px; margin-bottom: 20px;';
+        loaderImg.style.cssText = 'max-width: 200px; border-radius: 5px; margin-bottom: 20px;';
         
         // Add waving hand
         const waveContainer = document.createElement('div');
