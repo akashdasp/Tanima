@@ -6,6 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .helloImg img {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+            animation-name: wave-animation;
+            animation-duration: 2.5s;
+            animation-iteration-count: infinite;
+            transform-origin: 70% 70%;
+            margin: 20px 0;
+        }
+
+        @keyframes wave-animation {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+    </style>
 </head>
 
 <body>
@@ -92,6 +115,13 @@
                                 <h2>Happy Birthday <i id="nae">Tanima</i></h2>
                                 <h2>Have a wonderful day</h2>
                                 <h2>Filled with joy and happiness.</h2>
+                                <h2>May God make you wiser and happier</h2>
+                                <h2>May He bless you with health and joy</h2>
+                                <h2>Wishing you laughter, love, and success</h2>
+                                <h2>May all your dreams come true</h2>
+                                <h2>Keep shining brighter every day</h2>
+                                <h2>Enjoy your special day to the fullest</h2>
+                                <h2>Love, hugs, and endless blessings</h2>
                             </div>
                             <span id="typed" style="white-space:pre;"></span>
                         </div>
@@ -181,7 +211,7 @@
 <script src="js/script.js"></script>
 <script>
     // Countdown Timer Script
-    const targetDate = new Date('2025-11-04T00:00:00').getTime();
+    const targetDate = new Date('2025-10-04T00:00:00').getTime();
 
     const birthdayContent = document.getElementById('birthday-content');
     const preloader = document.getElementById('preloader');
@@ -201,13 +231,56 @@
     startButton.style.marginTop = "20px";
     startButton.style.display = "none";
     startButton.onclick = () => {
-        preloader.style.display = 'none';
-        birthdayContent.style.display = 'block';
-        // Initialize cake after content is shown
-        $('.cake').fadeIn('slow');
-        $('.cake_fadein').fadeIn('slow');
-        // Show balloons
-        document.getElementById('balloons-container').style.display = 'block';
+        // Hide countdown and show loading screen
+        countdown.style.display = 'none';
+        
+        // Create and show loader with image and text
+        const loader = document.createElement('div');
+        loader.style.cssText = 'text-align: center; padding: 20px;';
+        
+        const loaderImg = document.createElement('img');
+        loaderImg.src = 'Happy Birthday_files/Tanima.png';
+        loaderImg.style.cssText = 'max-width: 300px; border-radius: 10px; margin-bottom: 20px;';
+        
+        // Add waving hand
+        const waveContainer = document.createElement('div');
+        waveContainer.className = 'helloImg';
+        const waveImg = document.createElement('img');
+        waveImg.src = 'https://cdn.shopify.com/s/files/1/1061/1924/products/Waving_Hand_Sign_Emoji_Icon_ios10_grande.png';
+        waveImg.title = 'Hello';
+        waveContainer.appendChild(waveImg);
+        
+        const loaderText = document.createElement('h2');
+        loaderText.textContent = 'Hi Tanima';
+        loaderText.style.cssText = 'color: white; font-size: 32px; margin-top: 20px;';
+        
+        loader.appendChild(loaderImg);
+        loader.appendChild(waveContainer);
+        loader.appendChild(loaderText);
+        preloader.appendChild(loader);
+        
+        // After 5 seconds, show the short message loader, then show main content
+        setTimeout(() => {
+            // Replace loader content with a final message
+            loader.innerHTML = '';
+            const finalMsg = document.createElement('div');
+            finalMsg.style.cssText = 'color: white; font-size: 28px; padding: 40px; text-align: center;';
+            finalMsg.textContent = '😊 I Know You Been Waiting For This Day 😊';
+            loader.appendChild(finalMsg);
+
+            // Show this for 3 seconds, then reveal the main content
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                birthdayContent.style.display = 'block';
+                // Initialize cake after content is shown
+                $('.cake').fadeIn('slow');
+                $('.cake_fadein').fadeIn('slow');
+                // Show balloons
+                if (document.getElementById('balloons-container')) {
+                    document.getElementById('balloons-container').style.display = 'block';
+                }
+            }, 3000);
+        }, 5000);
     };
 
     const counterContainer = document.querySelector('.counter .container .row');
