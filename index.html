@@ -213,8 +213,16 @@
         <div id="beautiful-memories-modal">
             <button id="close-memories">×</button>
             <h2 class="memories-title">Beautiful Memories 💕</h2>
-            <div class="memories-image-container">
-                <img src="Happy Birthday_files/Tanima.png" alt="Beautiful Memory" class="memories-image">
+            <div class="memories-gallery">
+                <button class="gallery-nav gallery-prev" id="prev-photo">‹</button>
+                <div class="memories-image-container">
+                    <img src="" alt="Beautiful Memory" class="memories-image" id="memories-image">
+                </div>
+                <button class="gallery-nav gallery-next" id="next-photo">›</button>
+            </div>
+            <div class="gallery-indicators" id="gallery-indicators"></div>
+            <div class="gallery-counter">
+                <span id="current-photo">1</span> / <span id="total-photos">1</span>
             </div>
         </div>
     </div>
@@ -225,7 +233,7 @@
 <script src="js/script.js"></script>
 <script>
     // Countdown Timer Script
-    const targetDate = new Date('2025-11-04T00:00:00').getTime();
+    const targetDate = new Date('2025-11-04T00:00:00').getTime();0
 
     const birthdayContent = document.getElementById('birthday-content');
     const preloader = document.getElementById('preloader');
@@ -454,6 +462,7 @@
         $('#show-memories-btn').click(function() {
             $('#beautiful-memories-overlay').fadeIn(300);
             $('#show-memories-btn').fadeOut(300);
+            initGallery();
         });
 
         // Close Beautiful Memories modal when X is clicked
@@ -469,6 +478,106 @@
                 $('#show-memories-btn').fadeIn(300);
             }
         });
+
+        // Beautiful Memories Gallery Functionality
+        // Add your image paths here - you can add as many as you want
+        const memoriesPhotos = [
+            'Happy Birthday_files/Tanima.png',
+            // Add more image paths here, for example:
+            // 'img/memory1.jpg',
+            // 'img/memory2.jpg',
+            // 'Happy Birthday_files/photo2.png',
+        ];
+
+        let currentPhotoIndex = 0;
+
+        function initGallery() {
+            if (memoriesPhotos.length === 0) return;
+            
+            // Update total photos count
+            $('#total-photos').text(memoriesPhotos.length);
+            
+            // Create indicators
+            const indicatorsContainer = $('#gallery-indicators');
+            indicatorsContainer.empty();
+            memoriesPhotos.forEach((_, index) => {
+                const indicator = $('<span></span>').addClass('indicator-dot');
+                if (index === 0) indicator.addClass('active');
+                indicatorsContainer.append(indicator);
+            });
+            
+            // Show first image
+            showPhoto(0);
+        }
+
+        function showPhoto(index) {
+            if (index < 0 || index >= memoriesPhotos.length) return;
+            
+            currentPhotoIndex = index;
+            const image = $('#memories-image');
+            
+            // Fade out current image
+            image.fadeOut(200, function() {
+                $(this).attr('src', memoriesPhotos[index]);
+                $(this).fadeIn(300);
+            });
+            
+            // Update counter
+            $('#current-photo').text(index + 1);
+            
+            // Update indicators
+            $('.indicator-dot').removeClass('active');
+            $('.indicator-dot').eq(index).addClass('active');
+            
+            // Update navigation buttons visibility
+            $('#prev-photo').toggle(index > 0);
+            $('#next-photo').toggle(index < memoriesPhotos.length - 1);
+        }
+
+        function nextPhoto() {
+            if (currentPhotoIndex < memoriesPhotos.length - 1) {
+                showPhoto(currentPhotoIndex + 1);
+            }
+        }
+
+        function prevPhoto() {
+            if (currentPhotoIndex > 0) {
+                showPhoto(currentPhotoIndex - 1);
+            }
+        }
+
+        // Navigation button clicks
+        $('#next-photo').click(function(e) {
+            e.stopPropagation();
+            nextPhoto();
+        });
+
+        $('#prev-photo').click(function(e) {
+            e.stopPropagation();
+            prevPhoto();
+        });
+
+        // Indicator dots click
+        $(document).on('click', '.indicator-dot', function(e) {
+            e.stopPropagation();
+            const index = $(this).index();
+            showPhoto(index);
+        });
+
+        // Keyboard navigation (Arrow keys)
+        $(document).keydown(function(e) {
+            if ($('#beautiful-memories-overlay').is(':visible')) {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    nextPhoto();
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    prevPhoto();
+                } else if (e.key === 'Escape') {
+                    $('#beautiful-memories-overlay').fadeOut(300);
+                    $('#show-memories-btn').fadeIn(300);
+                }
+            }
+        });
+
     });
 </script>
 

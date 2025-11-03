@@ -444,6 +444,14 @@ img {
     text-align: center;
 }
 
+.memories-gallery {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
 .memories-image-container {
     position: relative;
     border-radius: 20px;
@@ -451,11 +459,19 @@ img {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     background: white;
     padding: 10px;
+    flex: 1;
+    max-width: 800px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .memories-image {
     width: 100%;
     height: auto;
+    max-height: 70vh;
+    object-fit: contain;
     border-radius: 15px;
     display: block;
     transition: transform 0.3s ease;
@@ -463,6 +479,80 @@ img {
 
 .memories-image:hover {
     transform: scale(1.02);
+}
+
+/* Gallery Navigation Buttons */
+.gallery-nav {
+    width: 50px;
+    height: 50px;
+    background: rgba(196, 81, 92, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 36px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.gallery-nav:hover {
+    background: #C4515C;
+    transform: scale(1.1);
+}
+
+.gallery-nav:active {
+    transform: scale(0.95);
+}
+
+.gallery-prev {
+    position: absolute;
+    left: -25px;
+}
+
+.gallery-next {
+    position: absolute;
+    right: -25px;
+}
+
+/* Gallery Indicators */
+.gallery-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(196, 81, 92, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator-dot:hover {
+    background: rgba(196, 81, 92, 0.7);
+    transform: scale(1.2);
+}
+
+.indicator-dot.active {
+    background: #C4515C;
+    transform: scale(1.3);
+}
+
+/* Gallery Counter */
+.gallery-counter {
+    text-align: center;
+    margin-top: 15px;
+    color: #C4515C;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 #close-memories {
@@ -505,5 +595,31 @@ img {
         width: 35px;
         height: 35px;
         font-size: 20px;
+    }
+
+    .memories-gallery {
+        gap: 5px;
+    }
+
+    .gallery-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 28px;
+    }
+
+    .gallery-prev {
+        left: 10px;
+    }
+
+    .gallery-next {
+        right: 10px;
+    }
+
+    .memories-image-container {
+        min-height: 300px;
+    }
+
+    .memories-image {
+        max-height: 60vh;
     }
 }
