@@ -555,6 +555,11 @@ img {
     font-weight: 600;
 }
 
+/* Memories Audio - Hidden (auto-playing) */
+#memories-audio {
+    display: none;
+}
+
 #close-memories {
     position: absolute;
     top: 20px;
