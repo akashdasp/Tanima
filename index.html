@@ -225,6 +225,11 @@
                 <span id="current-photo">1</span> / <span id="total-photos">1</span>
             </div>
         </div>
+        <!-- Audio for Beautiful Memories -->
+        <audio id="memories-audio" loop>
+            <source src="Happy Birthday_files/memories_mp3/134875.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 </body>
 <script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
@@ -463,12 +468,42 @@
             $('#beautiful-memories-overlay').fadeIn(300);
             $('#show-memories-btn').fadeOut(300);
             initGallery();
+            
+            // Pause background music (music.mp3)
+            const backgroundMusic = document.querySelector('.song');
+            if (backgroundMusic && !backgroundMusic.paused) {
+                backgroundMusic.pause();
+            }
+            
+            // Play memories audio
+            const memoriesAudio = document.getElementById('memories-audio');
+            if (memoriesAudio) {
+                memoriesAudio.play().catch(function(error) {
+                    console.log('Audio play failed:', error);
+                    // Some browsers require user interaction before playing audio
+                });
+            }
         });
 
         // Close Beautiful Memories modal when X is clicked
         $('#close-memories').click(function() {
             $('#beautiful-memories-overlay').fadeOut(300);
             $('#show-memories-btn').fadeIn(300);
+            
+            // Stop memories audio
+            const memoriesAudio = document.getElementById('memories-audio');
+            if (memoriesAudio) {
+                memoriesAudio.pause();
+                memoriesAudio.currentTime = 0; // Reset to beginning
+            }
+            
+            // Resume background music (music.mp3)
+            const backgroundMusic = document.querySelector('.song');
+            if (backgroundMusic && backgroundMusic.paused) {
+                backgroundMusic.play().catch(function(error) {
+                    console.log('Background music play failed:', error);
+                });
+            }
         });
 
         // Close Beautiful Memories modal when clicking outside the modal
@@ -476,6 +511,21 @@
             if (e.target.id === 'beautiful-memories-overlay') {
                 $('#beautiful-memories-overlay').fadeOut(300);
                 $('#show-memories-btn').fadeIn(300);
+                
+                // Stop memories audio
+                const memoriesAudio = document.getElementById('memories-audio');
+                if (memoriesAudio) {
+                    memoriesAudio.pause();
+                    memoriesAudio.currentTime = 0; // Reset to beginning
+                }
+                
+                // Resume background music (music.mp3)
+                const backgroundMusic = document.querySelector('.song');
+                if (backgroundMusic && backgroundMusic.paused) {
+                    backgroundMusic.play().catch(function(error) {
+                        console.log('Background music play failed:', error);
+                    });
+                }
             }
         });
 
@@ -517,7 +567,12 @@
         }
 
         function showPhoto(index) {
-            if (index < 0 || index >= memoriesPhotos.length) return;
+            // Handle looping - wrap around if index is out of bounds
+            if (index < 0) {
+                index = memoriesPhotos.length - 1; // Go to last image
+            } else if (index >= memoriesPhotos.length) {
+                index = 0; // Go to first image
+            }
             
             currentPhotoIndex = index;
             const image = $('#memories-image');
@@ -535,21 +590,21 @@
             $('.indicator-dot').removeClass('active');
             $('.indicator-dot').eq(index).addClass('active');
             
-            // Update navigation buttons visibility
-            $('#prev-photo').toggle(index > 0);
-            $('#next-photo').toggle(index < memoriesPhotos.length - 1);
+            // Navigation buttons are always visible for looping
+            $('#prev-photo').show();
+            $('#next-photo').show();
         }
 
         function nextPhoto() {
-            if (currentPhotoIndex < memoriesPhotos.length - 1) {
-                showPhoto(currentPhotoIndex + 1);
-            }
+            // Loop to first image if at the last image
+            const nextIndex = (currentPhotoIndex + 1) % memoriesPhotos.length;
+            showPhoto(nextIndex);
         }
 
         function prevPhoto() {
-            if (currentPhotoIndex > 0) {
-                showPhoto(currentPhotoIndex - 1);
-            }
+            // Loop to last image if at the first image
+            const prevIndex = (currentPhotoIndex - 1 + memoriesPhotos.length) % memoriesPhotos.length;
+            showPhoto(prevIndex);
         }
 
         // Navigation button clicks
@@ -580,6 +635,21 @@
                 } else if (e.key === 'Escape') {
                     $('#beautiful-memories-overlay').fadeOut(300);
                     $('#show-memories-btn').fadeIn(300);
+                    
+                    // Stop memories audio
+                    const memoriesAudio = document.getElementById('memories-audio');
+                    if (memoriesAudio) {
+                        memoriesAudio.pause();
+                        memoriesAudio.currentTime = 0; // Reset to beginning
+                    }
+                    
+                    // Resume background music (music.mp3)
+                    const backgroundMusic = document.querySelector('.song');
+                    if (backgroundMusic && backgroundMusic.paused) {
+                        backgroundMusic.play().catch(function(error) {
+                            console.log('Background music play failed:', error);
+                        });
+                    }
                 }
             }
         });
